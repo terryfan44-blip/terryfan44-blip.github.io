@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Unit Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2>Length Converter</h2>
+        <input type="number" id="lenInput" placeholder="Enter value" oninput="convertLength()">
+        <select id="lenFrom" onchange="convertLength()">
+            <option value="m">Meter (m)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="inch">Inch (inch)</option>
+        </select>
+        <select id="lenTo" onchange="convertLength()">
+            <option value="cm">Centimeter (cm)</option>
+            <option value="m">Meter (m)</option>
+            <option value="inch">Inch (inch)</option>
+        </select>
+        <div class="result" id="lenResult"></div>
+    </div>
+
+    <div class="card">
+        <h2>Weight Converter</h2>
+        <input type="number" id="wInput" placeholder="Enter value" oninput="convertWeight()">
+        <select id="wFrom" onchange="convertWeight()">
+            <option value="kg">Kilogram (kg)</option>
+            <option value="g">Gram (g)</option>
+            <option value="lb">Pound (lb)</option>
+        </select>
+        <select id="wTo" onchange="convertWeight()">
+            <option value="g">Gram (g)</option>
+            <option value="kg">Kilogram (kg)</option>
+            <option value="lb">Pound (lb)</option>
+        </select>
+        <div class="result" id="wResult"></div>
+    </div>
+</div>
+
+<script>
+function convertLength() {
+    let v = parseFloat(document.getElementById('lenInput').value) || 0;
+    let f = document.getElementById('lenFrom').value;
+    let t = document.getElementById('lenTo').value;
+    let res = 0;
+    if (f === 'm' && t === 'cm') res = v * 100;
+    if (f === 'cm' && t === 'm') res = v / 100;
+    if (f === 'inch' && t === 'cm') res = v * 2.54;
+    if (f === 'cm' && t === 'inch') res = v / 2.54;
+    if (f === 'm' && t === 'inch') res = v * 39.37;
+    if (f === 'inch' && t === 'm') res = v / 39.37;
+    document.getElementById('lenResult').innerText = res.toFixed(3);
+}
+
+function convertWeight() {
+    let v = parseFloat(document.getElementById('wInput').value) || 0;
+    let f = document.getElementById('wFrom').value;
+    let t = document.getElementById('wTo').value;
+    let res = 0;
+    if (f === 'kg' && t === 'g') res = v * 1000;
+    if (f === 'g' && t === 'kg') res = v / 1000;
+    if (f === 'kg' && t === 'lb') res = v * 2.20462;
+    if (f === 'lb' && t === 'kg') res = v / 2.20462;
+    document.getElementById('wResult').innerText = res.toFixed(3);
+}
+</script>
+</body>
+</html>
